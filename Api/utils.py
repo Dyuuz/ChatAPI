@@ -8,7 +8,7 @@ from django.conf import settings
 # Set your API key
 def get_ai_response(message):
     try:
-        openai.api_key = os.environ.get(settings.API_KEY),  # This is the default and can be omitted
+        openai.api_key = settings.API_KEY  # This is the default and can be omitted
         
 
         chat_completion = openai.ChatCompletion.create(
