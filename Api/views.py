@@ -50,6 +50,7 @@ class UserLogin(APIView):
         #try:
             # 
             data = request.data
+            print(f”Data: {data}")
             
             # 
             if not data:
@@ -59,7 +60,6 @@ class UserLogin(APIView):
             #   
             username = data.get('username')
             password = data.get('password')
-            print(password)
             
             # 
             if not username or not password:
