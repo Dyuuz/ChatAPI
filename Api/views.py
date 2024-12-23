@@ -47,7 +47,7 @@ class UserRegistration(APIView):
 # UserLogin Class View Function
 class UserLogin(APIView):
     def post(self, request):
-        #try:
+        try:
             # 
             data = request.data
             #print(f”Data: {data}")
@@ -98,12 +98,12 @@ class UserLogin(APIView):
                 return Response({"error" : "Invalid login details"},
                                 status=status.HTTP_400_BAD_REQUEST)
         
-        #  
-       # except Exception as e:
-           # return Response(
-              #  {"error": f"An unexpected error occurred: {str(e)}"},
-               # status=status.HTTP_500_INTERNAL_SERVER_ERROR
-          #  )
+        # 
+        except Exception as e:
+            return Response(
+               {"error": f"An unexpected error occurred: {str(e)}"},
+               status=status.HTTP_500_INTERNAL_SERVER_ERROR
+           )
           
 # Chat API Class View Function
 class ChatAPI(APIView):
@@ -117,7 +117,7 @@ class ChatAPI(APIView):
                     status=status.HTTP_400_BAD_REQUEST)
               
             #   
-            token = data['token']
+            token = data.get('token')
             message = data['message']
             
             # 
