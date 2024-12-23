@@ -50,7 +50,7 @@ class UserLogin(APIView):
         #try:
             # 
             data = request.data
-            print(f”Data: {data}")
+            #print(f”Data: {data}")
             
             # 
             if not data:
