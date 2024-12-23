@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-*@--t4xgfy)k430_yqafd=ucibe@x)$xo!*e)^1l%aq@n$%m-i
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'chatapi-1e6w.onrender.com',
     'localhost',
     '127.0.0.1',
     '192.168.76.169',
@@ -38,7 +39,7 @@ ALLOWED_HOSTS = [
     '192.168.76.198',
     '192.168.151.198',
     '192.168.159.198',
-    '192.168.111.198'
+    '192.168.111.198',
 ]
 
 
@@ -149,7 +150,7 @@ AUTH_USER_MODEL = 'Api.User'
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-EMAIL_HOST =  env('API_KEY', default=os.getenv('API_KEY'))
+API_KEY =  env('API_KEY', default=os.getenv('API_KEY'))
 
 #Lekan
 #123456789
