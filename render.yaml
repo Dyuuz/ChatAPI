@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: my-python-app
+    env: python
+    runtime: python
+    pythonVersion: "3.10.12"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py runserver 0.0.0.0:8000
