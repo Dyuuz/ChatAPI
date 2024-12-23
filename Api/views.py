@@ -98,11 +98,11 @@ class UserLogin(APIView):
                                 status=status.HTTP_400_BAD_REQUEST)
         
         #  
-       № except Exception as e:
+       # except Exception as e:
            # return Response(
-                {"error": f"An unexpected error occurred: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+              #  {"error": f"An unexpected error occurred: {str(e)}"},
+               # status=status.HTTP_500_INTERNAL_SERVER_ERROR
+          #  )
           
 # Chat API Class View Function
 class ChatAPI(APIView):
