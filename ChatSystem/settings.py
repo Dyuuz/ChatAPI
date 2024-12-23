@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-*@--t4xgfy)k430_yqafd=ucibe@x)$xo!*e)^1l%aq@n$%m-i
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'chatapi-1e6w.onrender.com',
     'localhost',
     '127.0.0.1',
     '192.168.76.169',
@@ -39,7 +40,6 @@ ALLOWED_HOSTS = [
     '192.168.151.198',
     '192.168.159.198',
     '192.168.111.198',
-    'https://chatapi-1e6w.onrender.com'
 ]
 
 
