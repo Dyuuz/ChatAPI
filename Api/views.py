@@ -106,8 +106,10 @@ class UserLogin(APIView):
 class ChatAPI(APIView):
     def post(self, request):
         try:
-            # pass icnoming data to variable data from client side
+            # pass incoming data to variable data from client side
             data = request.data
+
+            #Feedback if no data is inputted from client side
             if not data:
                 return Response({"token" : "This field is required",
                                 "message" : "This field is required"},
@@ -122,7 +124,7 @@ class ChatAPI(APIView):
                 return Response({"error" : "Token and message are required"}, 
                     status=status.HTTP_400_BAD_REQUEST)
             
-            # Verify if token exists from DN
+            # Verify if token exists from DB
             token = Token.objects.get(token=token)
             
             # Get user instance 
@@ -135,25 +137,24 @@ class ChatAPI(APIView):
                     user.tokens -= 100
                     user.save()
                     
-                    # 
+                    # Checks if user has asked the same question
                     duplicate_message_check = Chat.objects.filter(message=message)
                     
-                    # 
+                    # If user has asked, response will be generated from database 
                     if duplicate_message_check.exists():
                         duplicate_instance = Chat.objects.get(message=message)
                         return Response({"Message": duplicate_instance.message, 
                                         "Response": duplicate_instance.response}, status=status.HTTP_200_OK)
                     
-                    # 
+                    # Generate new response if the question is new from the user
                     Chat.objects.create(user=user, message= message, response=response)
             
-                    # 
+                    # Outputs new response to user
                     return Response({"Message": message, 
                             "Response": response}, status=status.HTTP_201_CREATED)
                     
             return redirect('user-login')
         
-        # 
         except Exception as e:
             return Response(
                 {"error": f"An unexpected error occurred: {str(e)}"},
@@ -165,26 +166,27 @@ class ChatAPI(APIView):
 class Balance(APIView):
     def post(self, request):
         try:
+            # pass incoming data to variable data from client side
             data  = request.data    
             
-            # 
+            # Feedback if no data is inputted from client side
             if not data:
                 return Response({"token" : "This field is required"},
                     status=status.HTTP_400_BAD_REQUEST)
                 
-            # 
+            # Get user details from client side if data exists
             data = data
             token = data['token']
             
-            # 
+            # Feedback if none of the input is invalid
             if not token:
                 return Response({"error" : "Token is required"}, 
                     status=status.HTTP_400_BAD_REQUEST)
             
-            # 
+            # Check if the inputted vale follows the police,
             token = Token.objects.get(token=token)
             
-            # 
+            # Proceed with if after it gets an instance of token
             if token:
                 user = request.user.username
                 token_balance = user.tokens
