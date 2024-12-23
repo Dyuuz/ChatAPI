@@ -1,8 +1,8 @@
 import time
 import openai
 import os
-from openai import OpenAI
-from openai.types import Completion, CompletionChoice, CompletionUsage, ChatModel
+#from openai import OpenAI
+#from openai.types import Completion, CompletionChoice, CompletionUsage, ChatModel
 
 # Set your API key
 def get_ai_response(message):
