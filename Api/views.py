@@ -57,8 +57,9 @@ class UserLogin(APIView):
                     status=status.HTTP_401_UNAUTHORIZED)
               
             #   
-            username = data['username']
-            password = data['password']
+            username = data.get('username')
+            password = data.get('password')
+            print(password)
             
             # 
             if not username or not password:
