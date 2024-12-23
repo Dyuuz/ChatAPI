@@ -47,7 +47,7 @@ class UserRegistration(APIView):
 # UserLogin Class View Function
 class UserLogin(APIView):
     def post(self, request):
-        try:
+        #try:
             # 
             data = request.data
             
@@ -98,8 +98,8 @@ class UserLogin(APIView):
                                 status=status.HTTP_400_BAD_REQUEST)
         
         #  
-        except Exception as e:
-            return Response(
+       № except Exception as e:
+           # return Response(
                 {"error": f"An unexpected error occurred: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
