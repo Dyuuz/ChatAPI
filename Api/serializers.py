@@ -22,6 +22,5 @@ class UserSerializer(serializers.ModelSerializer):
             # return the created user
             return user 
         
-        # 
         except Exception as e:
             return f"Error: {str(e)}"
