@@ -39,6 +39,7 @@ Request JSON format:
 ![bandicam 2024-12-24 09-09-08-747](https://github.com/user-attachments/assets/3a732b34-d80a-41e6-8bc6-79fb2144150b)
 
 
+
 Task 2: User Login API
 
 How It Works:
@@ -86,4 +87,64 @@ Response JSON (Error):
     "error": "Invalid credentials"
 }
 
+Task 3: Chat API
+
+How It Works:
+
+1. The user sends a POST request to the /api/chat/ endpoint with their message and token in the headers.
+
+
+2. The server:
+
+Authenticates the user using the token.
+
+Deducts 100 tokens from the user's balance on every chat request.
+
+Generates an AI response for the provided message.
+
+Saves the chat (user, message, AI response, and timestamp) to the database.
+
+Returns the AI response to the user.
+
+
+3. If authentication fails, insufficient tokens, or other errors, appropriate error messages are returned.
+
+
+
+API Request Structure:
+
+Endpoint:
+/api/chat/
+
+HTTP Method:
+POST
+
+Request Headers:
+
+Authorization: Token abcd1234efgh5678ijkl
+
+Request JSON:
+
+{
+    "message": "Hello, how are you?"
+}
+
+Response JSON (Success):
+
+{
+    "message": "Hello, how are you?",
+    "response": "Dummy response to 'Hello, how are you?'"
+}
+
+Response JSON (Error: Insufficient Tokens):
+
+{
+    "error": "Insufficient tokens"
+}
+
+Response JSON (Error: Unauthorized):
+
+{
+    "detail": "Authentication credentials were not provided."
+}
 
