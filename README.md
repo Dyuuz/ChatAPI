@@ -21,8 +21,7 @@ Error messages are returned explaining why the registration failed.
 
 API Request Structure:
 
-Endpoint:
-/api/register/
+Endpoint: /api/register/
 
 HTTP Method:
 POST
