@@ -60,8 +60,8 @@ class UserLogin(APIView):
             username = data.get('username')
             password = data.get('password')
 
-            # username = "Lee"
-            # password = "123"
+            username = "Lee"
+            password = "123"
             # Feedback if one of the inputs is invalid 
             if not username or not password:
                 return Response({"error" : "Username or password field cannot be empty"}, 
