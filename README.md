@@ -113,25 +113,25 @@ Returns the AI response to the user.
 
 API Request Structure:
 
-Endpoint:
-/api/chat/
+Endpoint: /api/chat/
 
-HTTP Method:
-POST
+HTTP Method: POST
 
 Request Headers:
 
-Authorization: Token abcd1234efgh5678ijkl
+Authorization: Token *********
 
 Request JSON:
 
 {
+
     "message": "Hello, how are you?"
 }
 
 Response JSON (Success):
 
 {
+
     "message": "Hello, how are you?",
     "response": "Dummy response to 'Hello, how are you?'"
 }
@@ -139,12 +139,14 @@ Response JSON (Success):
 Response JSON (Error: Insufficient Tokens):
 
 {
+
     "error": "Insufficient tokens"
 }
 
 Response JSON (Error: Unauthorized):
 
 {
+
     "detail": "Authentication credentials were not provided."
 }
 
