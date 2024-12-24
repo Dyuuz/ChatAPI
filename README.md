@@ -2,7 +2,9 @@
 
 Here’s a detailed explanation of how each task works, along with the API request structure to interact with it:
 
-Task 1: User Registration API
+Task 1: 
+
+User Registration API
 How It Works:
 
 The user sends a POST request to the /api/register/ endpoint with a JSON payload containing their username and password.
