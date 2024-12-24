@@ -1,34 +1,30 @@
 import time
-import openai
+from openai import OpenAI
 import os
-from django.conf import settings
-#from openai import OpenAI
-#from openai.types import Completion, CompletionChoice, CompletionUsage, ChatModel
+#from django.conf import settings
 
-# Set your API key
 def get_ai_response(message):
     try:
-        openai.api_key = settings.API_KEY  # This is the default and can be omitted
-        
+        client = OpenAI(api_key=settings.API_KEY)
+        #openai.api_key = settings.API_KEY
 
-        chat_completion = openai.ChatCompletion.create(
+        completion = client.chat.completions.create(
+            model="gpt-4",
             messages=[
-                {
-                    "role": "user",
-                    "content": message,
-                }
+                 {"role": "system", "content": "You are a helpful assistant."},
+                 {
+                   "role": "user",
+                   "content": message,
+                 }
             ],
-            model="gpt-3.5-turbo",
-            max_tokens=150,  # Adjust response length
-            temperature=0.7
         )
-        return chat_completion.choices[0].message['content']
+        return completion.choices[0].message.content
+        #return completion['choices'][0]['message']['content']
     
     except Exception as e:
         return f"Error: {str(e)}"
-        
 
-# if __name__ == "main":
-#     user_message = "prompt"
-#     ai_response = get_ai_response(user_message)
-#     print(f"AI Response: {ai_response}")
+if __name__ == "main":
+     user_message = "prompt"
+     ai_response = get_ai_response(user_message)
+     print(f"AI Response: {ai_response}")
