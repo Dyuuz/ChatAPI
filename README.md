@@ -57,32 +57,32 @@ The user can use this token for authenticated API calls like sending chat reques
 If invalid, an error message is returned.
 
 
-
-
 API Request Structure:
 
-Endpoint:
-/api/login/
+Endpoint: /api/login/
 
-HTTP Method:
-POST
+HTTP Method: POST
 
 Request JSON:
 
 {
+
     "username": "testuser",
+
     "password": "securepassword123"
 }
 
 Response JSON (Success):
 
 {
+
     "token": "abcd1234efgh5678ijkl"
 }
 
 Response JSON (Error):
 
 {
+
     "error": "Invalid credentials"
 }
 
