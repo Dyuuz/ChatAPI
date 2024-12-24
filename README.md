@@ -48,11 +48,11 @@ How It Works:
 
 2. The server authenticates the credentials:
 
-If valid, a token is generated (or retrieved if it already exists).
+If valid, a token is generated (or generates new token if it already exists) for account security.
 
 The token is returned to the user.
 
-The user can use this token for authenticated API calls.
+The user can use this token for authenticated API calls like sending chat requests.
 
 If invalid, an error message is returned.
 
