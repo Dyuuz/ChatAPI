@@ -5,6 +5,8 @@ services:
     runtime: python
     pythonVersion: "3.10.12"
     buildCommand: pip install -r requirements.txt
+                - python manage.py collectstatic --no-input
+                - python manage.py migrate
     startCommand: python manage.py runserver 0.0.0.0:8000
 
 static:
