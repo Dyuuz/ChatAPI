@@ -47,7 +47,7 @@ class UserRegistration(APIView):
 # UserLogin Class View Function
 class UserLogin(APIView):
     def post(self, request):
-        #try:
+        try:
             # pass icnoming data to variable data from client side
             data = request.data
             
@@ -60,8 +60,6 @@ class UserLogin(APIView):
             username = data.get('username')
             password = data.get('password')
 
-            username = "Lee"
-            password = "123"
             # Feedback if one of the inputs is invalid 
             if not username or not password:
                 return Response({"error" : "Username or password field cannot be empty"}, 
@@ -70,42 +68,42 @@ class UserLogin(APIView):
             # Ratify user input to keep the user logged in
             user = authenticate(request, username=username, password=password)
 
-            # try:
+            try:
                 # Proceeds with if after user is successfully authenticated
-            if user.is_authenticated:
-                    login(request, user)
-                    auth_token = str(uuid.uuid4())
-                    user = request.user
-                    user_instance = User.objects.get(username=username)
-                    token_instance = Token.objects.filter(user__username=user_instance.username)\
-                    
-                    # Rotate user token if the logged in user already has a login token
-                    if token_instance.exists():
-                        token = Token.objects.get(user__username=user.username)
-                        print(token.token)
-                        token.token = auth_token
-                        token.save()
-                        print(token.user.username)
+                if user.is_authenticated:
+                        login(request, user)
+                        auth_token = str(uuid.uuid4())
+                        user = request.user
+                        user_instance = User.objects.get(username=username)
+                        token_instance = Token.objects.filter(user__username=user_instance.username)
+                        
+                        # Rotate user token if the logged in user already has a login token
+                        if token_instance.exists():
+                            token = Token.objects.get(user__username=user.username)
+                            print(token.token)
+                            token.token = auth_token
+                            token.save()
+                            print(token.user.username)
+                            return Response({"Token": auth_token}, status=status.HTTP_200_OK)
+                        
+                        # Create a new token for user if they are just logging in for the first time
+                        Token.objects.create(token=auth_token, user=user)
+                        
+                        # Feedback after token creation
                         return Response({"Token": auth_token}, status=status.HTTP_200_OK)
                     
-                    # Create a new token for user if they are just logging in for the first time
-                    Token.objects.create(token=auth_token, user=user)
+                return Response({"error" : "Invalid login details"},
+                                status=status.HTTP_400_BAD_REQUEST) 
                     
-                    # Feedback after token creation
-                    return Response({"Token": auth_token}, status=status.HTTP_200_OK)
-                
-            return Response({"error" : "Invalid login details"},
-                            status=status.HTTP_400_BAD_REQUEST) 
-                    
-            # except:
-            #     return Response({"error" : "Invalid login details"},
-            #                     status=status.HTTP_400_BAD_REQUEST)
+            except:
+                return Response({"error" : "Invalid login details"},
+                                status=status.HTTP_400_BAD_REQUEST)
         
-        #except Exception as e:
-            #return Response(
-              # {"error": f"An unexpected error occurred: {str(e)}"},
-              # status=status.HTTP_500_INTERNAL_SERVER_ERROR
-           #)
+        except Exception as e:
+            return Response(
+              {"error": f"An unexpected error occurred: {str(e)}"},
+              status=status.HTTP_500_INTERNAL_SERVER_ERROR
+           )
           
 # Chat API Class View Function
 class ChatAPI(APIView):
@@ -172,7 +170,7 @@ class Balance(APIView):
     def post(self, request):
         try:
             # pass incoming data to variable data from client side
-            data  = request.data    
+            data  = request.data
             
             # Feedback if no data is inputted from client side
             if not data:
@@ -180,25 +178,25 @@ class Balance(APIView):
                     status=status.HTTP_400_BAD_REQUEST)
                 
             # Get user details from client side if data exists
-            data = data
             token = data['token']
+            print(token)
             
             # Feedback if none of the input is invalid
             if not token:
                 return Response({"error" : "Token is required"}, 
                     status=status.HTTP_400_BAD_REQUEST)
             
-            # Check if the inputted vale follows the police,
+            # Check if the inputted vale follows the police
             token = Token.objects.get(token=token)
             
             # Proceed with if after it gets an instance of token
             if token:
                 user = request.user.username
-                token_balance = user.tokens
+                token_balance = token.user.tokens
             
-            return Response({"User" : user },{"Balance" : token_balance }, status=status.HTTP_200_OK)
+            return Response({"User" : user , "Balance" : token_balance }, status=status.HTTP_200_OK)
         
-        # 
+        
         except Exception as e:
             return Response(
                 {"error": f"An unexpected error occurred: {str(e)}"},
