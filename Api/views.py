@@ -70,33 +70,36 @@ class UserLogin(APIView):
             # Ratify user input to keep the user logged in
             user = authenticate(request, username=username, password=password)
 
-            try:
+            # try:
                 # Proceeds with if after user is successfully authenticated
-                if user.is_authenticated:
-                        login(request, user)
-                        auth_token = str(uuid.uuid4())
-                        user = request.user
-                        user_instance = User.objects.get(username=username)
-                        token_instance = Token.objects.filter(user__username=user_instance.username)\
-                        
-                        # Rotate user token if the logged in user already has a login token
-                        if token_instance.exists():
-                            token = Token.objects.get(user__username=user.username)
-                            print(token.token)
-                            token.token = auth_token
-                            token.save()
-                            print(token.user.username)
-                            return Response({"Token": auth_token}, status=status.HTTP_200_OK)
-                        
-                        # Create a new token for user if they are just logging in for the first time
-                        Token.objects.create(token=auth_token, user=user)
-                        
-                        # Feedback after token creation
+            if user.is_authenticated:
+                    login(request, user)
+                    auth_token = str(uuid.uuid4())
+                    user = request.user
+                    user_instance = User.objects.get(username=username)
+                    token_instance = Token.objects.filter(user__username=user_instance.username)\
+                    
+                    # Rotate user token if the logged in user already has a login token
+                    if token_instance.exists():
+                        token = Token.objects.get(user__username=user.username)
+                        print(token.token)
+                        token.token = auth_token
+                        token.save()
+                        print(token.user.username)
                         return Response({"Token": auth_token}, status=status.HTTP_200_OK)
                     
-            except:
-                return Response({"error" : "Invalid login details"},
-                                status=status.HTTP_400_BAD_REQUEST)
+                    # Create a new token for user if they are just logging in for the first time
+                    Token.objects.create(token=auth_token, user=user)
+                    
+                    # Feedback after token creation
+                    return Response({"Token": auth_token}, status=status.HTTP_200_OK)
+                
+            return Response({"error" : "Invalid login details"},
+                            status=status.HTTP_400_BAD_REQUEST) 
+                    
+            # except:
+            #     return Response({"error" : "Invalid login details"},
+            #                     status=status.HTTP_400_BAD_REQUEST)
         
         #except Exception as e:
             #return Response(
