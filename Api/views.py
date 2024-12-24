@@ -57,11 +57,11 @@ class UserLogin(APIView):
                     status=status.HTTP_401_UNAUTHORIZED)
               
             # Get user details from client side if data exists
-            #username = data.get('username')
-            #password = data.get('password')
+            username = data.get('username')
+            password = data.get('password')
 
-            username = "Lee"
-            password = "123"
+            # username = "Lee"
+            # password = "123"
             # Feedback if one of the inputs is invalid 
             if not username or not password:
                 return Response({"error" : "Username or password field cannot be empty"}, 
