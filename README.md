@@ -26,7 +26,7 @@ Endpoint: /api/register/
 HTTP Method:
 POST
 
-Request JSON:
+Request JSON format:
 
 {
 
@@ -37,4 +37,53 @@ Request JSON:
 
 
 ![bandicam 2024-12-24 09-09-08-747](https://github.com/user-attachments/assets/3a732b34-d80a-41e6-8bc6-79fb2144150b)
+
+
+Task 2: User Login API
+
+How It Works:
+
+1. The user sends a POST request to the /api/login/ endpoint with their username and password.
+
+
+2. The server authenticates the credentials:
+
+If valid, a token is generated (or retrieved if it already exists).
+
+The token is returned to the user.
+
+The user can use this token for authenticated API calls.
+
+If invalid, an error message is returned.
+
+
+
+
+API Request Structure:
+
+Endpoint:
+/api/login/
+
+HTTP Method:
+POST
+
+Request JSON:
+
+{
+    "username": "testuser",
+    "password": "securepassword123"
+}
+
+Response JSON (Success):
+
+{
+    "token": "abcd1234efgh5678ijkl"
+}
+
+Response JSON (Error):
+
+{
+    "error": "Invalid credentials"
+}
+
 
