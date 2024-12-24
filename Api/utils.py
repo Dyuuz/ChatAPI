@@ -1,7 +1,8 @@
 import openai
+from django.conf import settings
 
 # Set your OpenAI API key
-openai.api_key = "settings.API_KEY"
+openai.api_key = settings.API_KEY
 
 # Example request to the GPT model
 def get_ai_response(prompt):
