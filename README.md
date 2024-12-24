@@ -28,6 +28,7 @@ Request JSON:
 
 {
     "username": "testuser***",
+
     "password": "*****"
 }
 
