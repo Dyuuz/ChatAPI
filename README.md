@@ -10,11 +10,13 @@ The user sends a POST request to the /api/register/ endpoint with a JSON payload
 The server validates the data using the UserRegistrationSerializer.
 
 If valid:
+
 A new user is created.
 The token_balance is initialized to 4000.
 A success message is returned.
 
 If invalid:
+
 Error messages are returned explaining why the registration failed.
 
 API Request Structure:
