@@ -210,6 +210,9 @@ Response JSON (Error: Unmatched token):
      "error": "An unexpected error occurred: Token matching query does not exist."
 }
 
+![1000630131](https://github.com/user-attachments/assets/1a222440-a849-4067-8d17-c33fd57a8f51)
+
+
 ![1000630131](https://github.com/user-attachments/assets/d9964b37-191f-4d6d-811d-67f9c363c2fd)
 
 
