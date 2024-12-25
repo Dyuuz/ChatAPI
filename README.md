@@ -146,3 +146,52 @@ Response JSON (Error: Unauthorized):
     "detail": "Authentication credentials were not provided."
 }
 
+Task 4: Token Balance API
+
+How It Works:
+
+1. The user sends a GET request to the /api/token-balance/ endpoint with their token in the headers.
+
+
+2. The server:
+
+Authenticates the user using the token.
+
+Fetches the current token_balance for the user.
+
+Returns the balance in the response.
+
+
+
+3. If authentication fails, an appropriate error message is returned.
+
+
+
+API Request Structure:
+
+Endpoint:
+/api/token-balance/
+
+HTTP Method:
+GET
+
+Request Headers:
+
+Authorization: Token abcd1234efgh5678ijkl
+
+Response JSON (Success):
+
+{
+
+    "token_balance": 3800
+}
+
+Response JSON (Error: Unauthorized):
+
+{
+
+    "detail": "Authentication credentials were not provided."
+}
+
+These API structures provide a comprehensive flow for managing user registration, authentication, chat functionality, and token tracking.
+
