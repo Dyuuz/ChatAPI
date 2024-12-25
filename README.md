@@ -203,19 +203,25 @@ Response JSON (Success):
 ![1000625643](https://github.com/user-attachments/assets/a51aecf3-f4d4-42c0-868a-624eb4dfe087)
 
 
-Response JSON (Error: Unauthorized):
+Response JSON (Error: Unmatched token):
 
 {
 
      "error": "An unexpected error occurred: Token matching query does not exist."
 }
 
-Response JSON (Error: Unauthorized):
+![1000630131](https://github.com/user-attachments/assets/d9964b37-191f-4d6d-811d-67f9c363c2fd)
+
+
+Response JSON (Error: login is required):
 
 {
 
          "error": "login before checking balance"
 }
+
+![1000630130](https://github.com/user-attachments/assets/fdc0b279-b4a1-47be-8869-b9a67e3c9a69)
+
 
 These API structures provide a comprehensive flow for managing user registration, authentication, chat functionality, and token tracking.
 
