@@ -117,10 +117,6 @@ Endpoint: /api/chat/
 
 HTTP Method: POST
 
-Request Headers:
-
-Authorization: Token *********
-
 Request JSON:
 
 {
