@@ -70,7 +70,7 @@ Request JSON:
 
     "username": "testuser",
 
-    "password": "securepassword123"
+    "password": "securepassword***"
 }
 
 Response JSON (Success):
@@ -121,6 +121,7 @@ Request JSON:
 
 {
 
+    "token" : "ahdudjdis****"
     "message": "Hello, how are you?"
 }
 
@@ -129,7 +130,7 @@ Response JSON (Success):
 {
 
     "message": "Hello, how are you?",
-    "response": "Dummy response to 'Hello, how are you?'"
+    "response": "AI response to 'Hello, how are you?'"
 }
 
 Response JSON (Error: Insufficient Tokens):
