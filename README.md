@@ -38,6 +38,9 @@ Request JSON format:
 
 ![bandicam 2024-12-24 09-09-08-747](https://github.com/user-attachments/assets/3a732b34-d80a-41e6-8bc6-79fb2144150b)
 
+![1000625637](https://github.com/user-attachments/assets/1a800b2c-a4e5-464e-876c-617434f699ef)
+
+
 
 
 Task 2: User Login API
@@ -86,6 +89,16 @@ Response JSON (Error):
 
     "error": "Invalid credentials"
 }
+
+
+![1000625640](https://github.com/user-attachments/assets/84624732-8fa6-499f-9272-53fcb407a3ac)
+
+
+![1000625639](https://github.com/user-attachments/assets/40561bc5-b0fd-4fc8-bb85-3a9e8b8b96af)
+
+
+![1000625638](https://github.com/user-attachments/assets/6730a143-622c-49f9-aad1-e353cb2ab406)
+
 
 Task 3: Chat API
 
@@ -147,6 +160,10 @@ Response JSON (Error: Unauthorized):
     "detail": "Authentication credentials were not provided."
 }
 
+
+![1000628943](https://github.com/user-attachments/assets/98d5664f-fd40-4b24-a642-992080f553bd)
+
+
 Task 4: Token Balance API
 
 How It Works:
@@ -182,6 +199,10 @@ Response JSON (Success):
 
     "token_balance": 3800
 }
+
+
+![1000625643](https://github.com/user-attachments/assets/a51aecf3-f4d4-42c0-868a-624eb4dfe087)
+
 
 Response JSON (Error: Unauthorized):
 
