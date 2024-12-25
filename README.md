@@ -91,13 +91,12 @@ Response JSON (Error):
 }
 
 
+![1000625638](https://github.com/user-attachments/assets/6730a143-622c-49f9-aad1-e353cb2ab406)
+
 ![1000625640](https://github.com/user-attachments/assets/84624732-8fa6-499f-9272-53fcb407a3ac)
 
 
 ![1000625639](https://github.com/user-attachments/assets/40561bc5-b0fd-4fc8-bb85-3a9e8b8b96af)
-
-
-![1000625638](https://github.com/user-attachments/assets/6730a143-622c-49f9-aad1-e353cb2ab406)
 
 
 Task 3: Chat API
