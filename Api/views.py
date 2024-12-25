@@ -134,7 +134,7 @@ class ChatAPI(APIView):
             user = request.user
             if user:
                 
-                # Proceeds with if if user exists
+                # Proceeds with if statement if user exists
                 if token:
                     response = get_ai_response(message)
                     user.tokens -= 100
