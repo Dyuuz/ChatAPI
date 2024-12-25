@@ -127,35 +127,43 @@ class ChatAPI(APIView):
                 return Response({"error" : "Token and message are required"}, 
                     status=status.HTTP_400_BAD_REQUEST)
             
-            # Verify if token exists from DB
-            token = Token.objects.get(token=token)
-            
             # Get user instance 
             user = request.user
             if user:
                 
-                # Proceeds with if statement if user exists
-                if token:
-                    response = get_ai_response(message)
-                    user.tokens -= 100
-                    user.save()
+                # Check if user has enough token to ask a question
+                if user.tokens < 100:
+                    return Response({"error" : "Insufficient token, you need at least 100 tokens to ask a question"}, 
+                        status=status.HTTP_400_BAD_REQUEST)
                     
-                    # Checks if user has asked the same question
-                    duplicate_message_check = Chat.objects.filter(message=message)
-                    
-                    # If user has asked, response will be generated from database 
-                    if duplicate_message_check.exists():
-                        duplicate_instance = Chat.objects.get(message=message)
-                        return Response({"Message": duplicate_instance.message, 
-                                        "Response": duplicate_instance.response}, status=status.HTTP_200_OK)
-                    
-                    # Generate new response if the question is new from the user
-                    Chat.objects.create(user=user, message= message, response=response)
-            
-                    # Outputs new response to user
-                    return Response({"Message": message, 
-                            "Response": response}, status=status.HTTP_201_CREATED)
-                    
+                else:
+                    # Verify if token exists from DB
+                    token = Token.objects.get(token=token)
+                    # Proceeds with if statement if user exists
+                    if token:
+                        response = get_ai_response(message)
+                        user.tokens -= 100
+                        user.save()
+                        
+                        # Checks if user has asked the same question
+                        duplicate_message_check = Chat.objects.filter(message=message)
+                        
+                        # If user has asked, response will be generated from database 
+                        if duplicate_message_check.exists():
+                            duplicate_instance = Chat.objects.get(message=message)
+                            return Response({"Message": duplicate_instance.message, 
+                                            "Response": duplicate_instance.response}, status=status.HTTP_200_OK)
+                        
+                        # Generate new response if the question is new from the user
+                        Chat.objects.create(user=user, message= message, response=response)
+                
+                        # Outputs new response to user
+                        return Response({"Message": message, 
+                                "Response": response}, status=status.HTTP_201_CREATED)
+                    else:
+                        return Response({"error" : "Invalid token"}, 
+                            status=status.HTTP_400_BAD_REQUEST) 
+                                           
             return redirect('user-login')
         
         except Exception as e:
