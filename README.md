@@ -150,7 +150,7 @@ Task 4: Token Balance API
 
 How It Works:
 
-1. The user sends a GET request to the /api/token-balance/ endpoint with their token in the headers.
+1. The user sends a POST request to the /api/balance/ endpoint
 
 
 2. The server:
@@ -170,14 +170,10 @@ Returns the balance in the response.
 API Request Structure:
 
 Endpoint:
-/api/token-balance/
+/api/balance/
 
 HTTP Method:
-GET
-
-Request Headers:
-
-Authorization: Token abcd1234efgh5678ijkl
+POST
 
 Response JSON (Success):
 
