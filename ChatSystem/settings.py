@@ -159,5 +159,5 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 API_KEY =  env('API_KEY', default=os.getenv('API_KEY'))
 
-#Lekan
-#123456789
+#admin1
+#12345

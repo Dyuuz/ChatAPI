@@ -62,7 +62,7 @@ class UserLogin(APIView):
 
             # Feedback if one of the inputs is invalid 
             if not username or not password:
-                return Response({"error" : "Username or password field cannot be empty"}, 
+                return Response({"error" : "Make sure you have username and password in your request"}, 
                     status=status.HTTP_401_UNAUTHORIZED)
                 
             # Ratify user input to keep the user logged in
@@ -77,22 +77,22 @@ class UserLogin(APIView):
                         user_instance = User.objects.get(username=username)
                         token_instance = Token.objects.filter(user__username=user_instance.username)
                         
-                        # Rotate user token if the logged in user already has a login token
+                        # Rotate user token if the logged in user already has a token
                         if token_instance.exists():
                             token = Token.objects.get(user__username=user.username)
-                            print(token.token)
                             token.token = auth_token
                             token.save()
-                            print(token.user.username)
                             return Response({"Token": auth_token}, status=status.HTTP_200_OK)
                         
                         # Create a new token for user if they are just logging in for the first time
-                        Token.objects.create(token=auth_token, user=user)
+                        else:
+                            Token.objects.create(token=auth_token, user=user)
+                            
+                            # Feedback after token creation
+                            return Response({"Token": auth_token}, status=status.HTTP_200_OK)
                         
-                        # Feedback after token creation
-                        return Response({"Token": auth_token}, status=status.HTTP_200_OK)
-                    
-                return Response({"error" : "Invalid login details"},
+                else:
+                    return Response({"error" : "Invalid login details"},
                                 status=status.HTTP_400_BAD_REQUEST) 
                     
             except:
@@ -124,51 +124,61 @@ class ChatAPI(APIView):
             
             # Feedback if one of the input is invalid
             if not token or not message:
-                return Response({"error" : "Token and message are required"}, 
+                return Response({"error" : "Make sure you have message and token in your request"}, 
                     status=status.HTTP_400_BAD_REQUEST)
             
             # Get user instance 
-            user = request.user
-            if user:
-                
-                # Check if user has enough token to ask a question
-                if user.tokens < 100:
-                    return Response({"error" : "Insufficient token, you need at least 100 tokens to ask a question"}, 
-                        status=status.HTTP_400_BAD_REQUEST)
+            try:
+                user = request.user
+                if user:
                     
-                else:
-                    # Verify if token exists from DB
-                    token = Token.objects.get(token=token)
-                    # Proceeds with if statement if user exists
-                    if token:
-                        response = get_ai_response(message)
-                        user.tokens -= 100
-                        user.save()
+                    # Check if user has enough token to ask a question
+                    if user.tokens < 100:
+                        return Response({"error" : "Insufficient token, you need at least 100 tokens to ask a question"}, 
+                            status=status.HTTP_400_BAD_REQUEST)
                         
-                        # Checks if user has asked the same question
-                        duplicate_message_check = Chat.objects.filter(message=message)
-                        
-                        # If user has asked, response will be generated from database 
-                        if duplicate_message_check.exists():
-                            duplicate_instance = Chat.objects.get(message=message)
-                            return Response({"Message": duplicate_instance.message, 
-                                            "Response": duplicate_instance.response}, status=status.HTTP_200_OK)
-                        
-                        # Generate new response if the question is new from the user
-                        Chat.objects.create(user=user, message= message, response=response)
-                
-                        # Outputs new response to user
-                        return Response({"Message": message, 
-                                "Response": response}, status=status.HTTP_201_CREATED)
                     else:
-                        return Response({"error" : "Invalid token"}, 
-                            status=status.HTTP_400_BAD_REQUEST) 
-                                           
-            return redirect('user-login')
+                        # Verify if token exists from DB
+                        try:
+                            token = Token.objects.get(token=token)
+                            # Proceeds with if statement if user exists
+                            if token:
+                                response = get_ai_response(message)
+                                user.tokens -= 100
+                                user.save()
+                                
+                                # Checks if user has asked the same question
+                                duplicate_message_check = Chat.objects.filter(message=message)
+                                
+                                # If user has asked, response will be generated from database 
+                                if duplicate_message_check.exists():
+                                    duplicate_instance = Chat.objects.get(message=message)
+                                    return Response({"Message": duplicate_instance.message, 
+                                                    "Response": duplicate_instance.response}, status=status.HTTP_200_OK)
+                                
+                                # Generate new response if the question is new from the user
+                                Chat.objects.create(user=user, message= message, response=response)
+                        
+                                # Outputs new response to user
+                                return Response({"Message": message, 
+                                        "Response": response}, status=status.HTTP_201_CREATED)
+                            
+                            else:
+                                return Response({"error" : "Invalid token"}, 
+                                    status=status.HTTP_400_BAD_REQUEST)
+                        except:
+                            return Response({"error" : "Invalid token, input your last generated token on login"}, 
+                                status=status.HTTP_400_BAD_REQUEST)
+                            
+            except Exception as e:
+                return Response(
+                    {"error": f"pls login before making a chat request"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
         
         except Exception as e:
             return Response(
-                {"error": f"An unexpected error occurred: {str(e)}"},
+                {"error": f"Make sure you have message and token in your request"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         
@@ -179,7 +189,7 @@ class Balance(APIView):
         try:
             # pass incoming data to variable data from client side
             data  = request.data
-            
+
             # Feedback if no data is inputted from client side
             if not data:
                 return Response({"token" : "This field is required"},
@@ -187,23 +197,22 @@ class Balance(APIView):
                 
             # Get user details from client side if data exists
             token = data['token']
-            print(token)
             
             # Feedback if none of the input is invalid
             if not token:
                 return Response({"error" : "Token is required"}, 
                     status=status.HTTP_400_BAD_REQUEST)
             
-            # Check if the inputted vale follows the police
-            token = Token.objects.get(token=token)
+            user = request.user
             
-            # Proceed with if after it gets an instance of token
-            if token:
-                user = request.user.username
-                token_balance = token.user.tokens
-            
-            return Response({"User" : user , "Balance" : token_balance }, status=status.HTTP_200_OK)
-        
+            # if user is not logged in, it will return an error
+            if user in list(User.objects.all()):
+                    token = Token.objects.get(token=token)
+                    token_balance = token.user.tokens
+                    return Response({"User" : user.username , "Balance" : token_balance }, status=status.HTTP_200_OK)
+            else: 
+                return Response({"error" : "login before checking balance"},        
+                status=status.HTTP_400_BAD_REQUEST)
         
         except Exception as e:
             return Response(
