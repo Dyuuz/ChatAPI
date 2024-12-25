@@ -207,7 +207,14 @@ Response JSON (Error: Unauthorized):
 
 {
 
-    "detail": "Authentication credentials were not provided."
+     "error": "An unexpected error occurred: Token matching query does not exist."
+}
+
+Response JSON (Error: Unauthorized):
+
+{
+
+         "error": "login before checking balance"
 }
 
 These API structures provide a comprehensive flow for managing user registration, authentication, chat functionality, and token tracking.
