@@ -103,7 +103,7 @@ Task 3: Chat API
 
 How It Works:
 
-1. The user sends a POST request to the /api/chat/ endpoint with their message and token in the headers.
+1. The user sends a POST request to the /api/chat/ endpoint with their message and token.
 
 
 2. The server:
