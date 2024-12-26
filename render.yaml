@@ -2,15 +2,10 @@ services:
   - type: web
     name: ChatSystem
     env: python
-    runtime: python
-    pythonVersion: "3.10.12"
-    buildCommand: pip install -r requirements.txt
-                - python manage.py collectstatic --no-input
-                - python manage.py migrate
-    startCommand: python manage.py runserver 0.0.0.0:8000
-
-static:
-  - type: web
-    name: static
-    path: /static/
-    root: Api/static/
+    buildCommand: "python manage.py collectstatic --noinput && pip install -r requirements.txt"
+    startCommand: "gunicorn ChatSystem.wsgi"
+    static:       # Static route configuration
+      - type: web
+        name: static
+        path: /static/
+        root: staticfiles 
