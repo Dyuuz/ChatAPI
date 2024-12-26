@@ -158,6 +158,3 @@ env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 API_KEY =  env('API_KEY', default=os.getenv('API_KEY'))
-
-#admin1
-#12345
