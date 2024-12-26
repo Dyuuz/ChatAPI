@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: my-python-app
+    name: ChatSystem
     env: python
     runtime: python
     pythonVersion: "3.10.12"
