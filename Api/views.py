@@ -91,7 +91,7 @@ class UserLogin(APIView):
                             return Response({"Token": auth_token}, status=status.HTTP_200_OK)
                         
                 else:
-                    return Response({"error" : "Invalid login details"},
+                    return Response({"error" : "Invalid login details, check your username and password"},
                                 status=status.HTTP_400_BAD_REQUEST) 
                     
             except:
