@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,7 +10,7 @@ import uuid
 
 # Create your views here.
 
-# Redit
+# Redirect to user registration page
 def home(request):
     return redirect('user-register')
 
