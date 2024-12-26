@@ -50,7 +50,7 @@ class UserLogin(APIView):
         try:
             # pass icnoming data to variable data from client side
             data = request.data
-            
+            print(data)
             # Feedback if no data is inputted from client side
             if not data:
                 return Response({"username" : "This field is required", "password" : "This field is required"},
