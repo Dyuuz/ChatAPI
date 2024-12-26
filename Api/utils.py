@@ -8,7 +8,7 @@ openai.api_key = settings.API_KEY
 def get_ai_response(prompt):
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",  # Use "gpt-4" if you have access
+            model="gpt-4o-mini",  # Use "gpt-4" if you have access
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt},
