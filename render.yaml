@@ -7,10 +7,10 @@ services:
     buildCommand: pip install -r requirements.txt
                 - python manage.py collectstatic --no-input
                 - python manage.py migrate
-    startCommand: python manage.py gunicorn ChatSystem.wsgi
+    startCommand: python manage.py runserver 0.0.0.0:8000
 
 static:
   - type: web
     name: static
     path: /static/
-    root: /Api/static/
+    root: Api/static/
