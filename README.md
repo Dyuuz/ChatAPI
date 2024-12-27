@@ -62,7 +62,7 @@ If valid, a token is generated (or generates new token if it already exists) for
 
 The token is returned to the user.
 
-The user can use this token for authenticated API calls like sending chat requests.
+The user can use this token for authenticated API calls like sending chat requests and checking token balance.
 
 If invalid, an error message is returned.
 
