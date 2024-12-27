@@ -1,5 +1,11 @@
 # ChatSystemAPI
 
+ChatApi is now live and accessible to everyone. For now, data is stored temporarily using an SQLite3 database, and AI responses might be delayed occasionally because OpenAI requires premium access for uninterrupted performance. Rest assured, both the database and response times will be improved with upcoming updates.
+
+
+https://chatapi-1e6w.onrender.com/api/login
+
+
 Here’s a detailed explanation of how each task works, along with the API request structure to interact with it:
 
 Task 1: User Registration API
