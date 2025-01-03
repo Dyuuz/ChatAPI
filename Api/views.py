@@ -171,7 +171,7 @@ class ChatAPI(APIView):
                             
             except Exception as e:
                 return Response(
-                    {"error": f"pls login before making a chat request({e})"},
+                    {"error": f"pls login before making a chat request({str(e)})"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
         
