@@ -28,18 +28,9 @@ SECRET_KEY = 'django-insecure-*@--t4xgfy)k430_yqafd=ucibe@x)$xo!*e)^1l%aq@n$%m-i
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'chatapi-1e6w.onrender.com',
+    'https://chatapi-3rty.onrender.com',
     'localhost',
-    '127.0.0.1',
-    '192.168.76.169',
-    '192.168.141.198',
-    '192.168.42.198',
-    '192.168.0.169',
-    '192.168.0.190',
-    '192.168.76.198',
-    '192.168.151.198',
-    '192.168.159.198',
-    '192.168.111.198',
+    '127.0.0.1'
 ]
 
 
@@ -156,7 +147,11 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Add your frontend domain here
+    'https://chatapi-3rty.onrender.com',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+   'https://chatapi-3rty.onrender.com',
 ]
 
 AUTH_USER_MODEL = 'Api.User'
